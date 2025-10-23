@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken"
 import mongoose from "mongoose";
 
 export async function signup(req,res){
-    const {email,password,fullName,university,linkGit,bio}=req.body
+    const {email,password,fullName,university,linkGit,bio,location}=req.body
 
     try {
         if(!email || !password || !fullName || !university || !linkGit || !location){
