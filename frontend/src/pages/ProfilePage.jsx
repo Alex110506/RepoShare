@@ -47,7 +47,7 @@ const ProfilePage = () => {
 
     const handleuserEdit= async ()=>{
         try {
-            const res=await fetch(`${BASE_URL}/user/edit`,{
+            const res=await fetch(`${BASE_URL}/auth/edit`,{
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
