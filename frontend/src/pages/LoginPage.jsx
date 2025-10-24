@@ -6,6 +6,8 @@ import toast from 'react-hot-toast'
 import { useContext } from 'react'
 import { AuthContext } from '../components/AuthContext'
 
+const BASE_URL=import.meta.env.MODE==="development" ? "http://localhost:5001/api" : "/api"
+
 const LoginPage = () => {
 
     const { user, logout,login } = useContext(AuthContext);
@@ -21,7 +23,7 @@ const LoginPage = () => {
         e.preventDefault()
 
         try {
-            const res = await fetch("http://localhost:5001/api/auth/login", {
+            const res = await fetch(`${BASE_URL}/auth/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

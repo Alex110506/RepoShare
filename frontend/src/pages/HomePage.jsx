@@ -4,6 +4,8 @@ import { AuthContext } from '../components/AuthContext'
 import toast from 'react-hot-toast'
 import PostCard from '../components/PostCard'
 
+const BASE_URL=import.meta.env.MODE==="development" ? "http://localhost:5001/api" : "/api"
+
 const HomePage = () => {
 
     const {user}=useContext(AuthContext)
@@ -15,7 +17,7 @@ const HomePage = () => {
     const getPosts=async (location, page=1)=>{
         try {
             const loc = location || "all";
-            const res = await fetch(`http://localhost:5001/api/post/getRecentPosts/${loc}?page=${page}`);
+            const res = await fetch(`${BASE_URL}/post/getRecentPosts/${loc}?page=${page}`);
 
             const data = await res.json();
 

@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import toast from 'react-hot-toast';
 
+const BASE_URL=import.meta.env.MODE==="development" ? "http://localhost:5001" : ""
+
 const PostCardProfile = ({postId,image,githubLink,description,fullName,userId,profilePic,university, location}) => {
     
     const [edit,setEdit]=React.useState(false)
@@ -15,7 +17,7 @@ const PostCardProfile = ({postId,image,githubLink,description,fullName,userId,pr
 
         console.log(post);
         try {
-            const res=await fetch(`http://localhost:5001/api/post/editPost/${postId}`,{
+            const res=await fetch(`${BASE_URL}/api/post/editPost/${postId}`,{
                 method:"PUT",
                 credentials:"include",
                 headers:{
@@ -44,7 +46,7 @@ const PostCardProfile = ({postId,image,githubLink,description,fullName,userId,pr
         const id=postId
         console.log(id);
         try {
-            const res = await fetch(`http://localhost:5001/api/post/delPost/${id}`, {
+            const res = await fetch(`${BASE_URL}/api/post/delPost/${id}`, {
                 method: "DELETE",
                 credentials: "include"
             });
@@ -78,7 +80,7 @@ const PostCardProfile = ({postId,image,githubLink,description,fullName,userId,pr
         <hr></hr>
         
         <div className='flex w-full'>
-            <img src={`http://localhost:5001${image}`} className='w-96 h-96' alt="porject image" />
+            <img src={`${BASE_URL}${image}`} className='w-96 h-96' alt="porject image" />
         </div>
         <div className='flex px-4 overflow-x-auto mt-1'>
             {

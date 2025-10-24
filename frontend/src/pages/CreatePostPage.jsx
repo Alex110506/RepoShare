@@ -1,6 +1,8 @@
 import React from 'react'
 import toast from 'react-hot-toast';
 
+const BASE_URL=import.meta.env.MODE==="development" ? "http://localhost:5001/api" : "/api"
+
 const CreatePostPage = () => {
 
     const [postData,setPostData]=React.useState({
@@ -30,7 +32,7 @@ const CreatePostPage = () => {
         formData.append("githubLink", postData.githubLink);
         formData.append("description", postData.description);
         try {
-            const res=await fetch("http://localhost:5001/api/post/createPost", {
+            const res=await fetch(`${BASE_URL}/post/createPost`, {
                 method: "POST",
                 body: formData,
                 credentials:"include"

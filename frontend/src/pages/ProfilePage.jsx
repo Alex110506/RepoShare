@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import PostCardProfile from '../components/PostCardProfile'
 
+const BASE_URL=import.meta.env.MODE==="development" ? "http://localhost:5001/api" : "/api"
+
 const ProfilePage = () => {
 
     const navigate=useNavigate()
@@ -26,7 +28,7 @@ const ProfilePage = () => {
     const fetchUserData = async () => {
         try {
             setLoading(true);
-            const res = await fetch("http://localhost:5001/api/auth/me",{
+            const res = await fetch(`${BASE_URL}/auth/me`,{
                 credentials: "include",
             });
 
@@ -44,7 +46,7 @@ const ProfilePage = () => {
     const fetchUserPosts=async ()=>{
         try {
             setLoading(true)
-            const res=await fetch("http://localhost:5001/api/post/getMyPosts",{
+            const res=await fetch(`${BASE_URL}/post/getMyPosts`,{
                 credentials:"include"
             })
             if(!res.ok){

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AuthContext } from '../components/AuthContext'
 
-
+const BASE_URL=import.meta.env.MODE==="development" ? "http://localhost:5001/api" : "/api"
 
 const SignupPage = () => {
 
@@ -37,7 +37,7 @@ const SignupPage = () => {
         e.preventDefault()
 
         try {
-            const res = await fetch("http://localhost:5001/api/auth/signup", {
+            const res = await fetch(`${BASE_URL}/auth/signup`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
