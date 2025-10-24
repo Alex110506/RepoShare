@@ -77,6 +77,7 @@ export const getPosts = async (req, res)=>{
     const loc = req.params.location || "all";
     let location = loc === "all" ? "" : loc;
 
+    
     let postsQuery=Post.find()
         .sort({createdAt:-1})
         .skip(skip)
