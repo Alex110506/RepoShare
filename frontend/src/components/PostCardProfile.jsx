@@ -28,8 +28,8 @@ const PostCardProfile = ({postId,image,githubLink,description,fullName,userId,pr
     };
   
     return (
-    <div className='bg-slate-300 text-black rounded-lg'>
-        <div className='flex flex-row gap-4 p-4 pb-0'>
+    <div className='bg-slate-300 text-black rounded-lg w-96'>
+        <div className='flex flex-row gap-4 p-4 pb-0 mb-2'>
             <div className='h-12 w-12 rounded-full'>
                 <img src={profilePic} alt="profile picture" />
             </div>
@@ -42,10 +42,10 @@ const PostCardProfile = ({postId,image,githubLink,description,fullName,userId,pr
         <hr></hr>
         
         <div className='flex w-full'>
-            <img src={`http://localhost:5001${image}`} className='w-full' alt="porject image" />
+            <img src={`http://localhost:5001${image}`} className='w-96 h-96' alt="porject image" />
         </div>
         <div className='flex px-4'>
-            <h1 className='text-xl'><a href={githubLink}>{githubLink}</a></h1>
+            <h1 className='text-xl font-bold'><a href={githubLink}>{githubLink}</a></h1>
         </div>
         <div className='flex p-4 pt-0'>
             <span>
@@ -54,10 +54,6 @@ const PostCardProfile = ({postId,image,githubLink,description,fullName,userId,pr
         </div>
         <div className='flex flex-row gap-4 justify-end items-end px-2 pb-2'>
 
-            <button className='flex flex-row gap-2 p-2 rounded-md bg-red-400 hover:bg-red-600'>
-                <h3 className='text-lg font-bold'>Edit Post</h3>
-                <i className="bi bi-pencil text-xl"></i>
-            </button>
 
             <button onClick={handleDelete} className='flex flex-row gap-2 p-2 rounded-md bg-red-400 hover:bg-red-600'>
                 <h3 className='text-lg font-bold'>Delete Post</h3>

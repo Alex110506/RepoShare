@@ -2,25 +2,26 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from './AuthContext';
+import { ThemeContext } from './ThemeContext';
 
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext);
 
+    const {theme,toggleTheme,setTheme}=useContext(ThemeContext)
+
     return (
         <nav className="bg-base-300 border-b border-base-300 sticky top-0 z-20 h-16 flex items-center justify-between px-4">
-            <div className="flex flex-1 items-center gap-10">
+            <div className="flex flex-1 items-center gap-4">
                 <Link to={"/"} className="flex items-center gap-2">
                     <i className="bi bi-git text-3xl text-secondary"></i>
                     <span className="font-bold text-2xl">RepoShare</span>
                 </Link>
 
-                <div className="flex-1">
-                    <input
-                        type="text"
-                        placeholder="Search..."
-                        className="input w-full pl-4"
-                    />
-                </div>
+                
+                <select className='bg-base-100 h-full' value={theme} onChange={(e)=>setTheme(e.target.value)}>
+                    <option value="dark">Dark</option>
+                    <option value="light">Light</option>
+                </select>
             </div>
 
             {user && (

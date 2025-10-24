@@ -113,8 +113,10 @@ const ProfilePage = () => {
         </div>
         <hr className='w-[95vw] md:w-1/3'></hr>
         <div className='flex flex-col'>
-            <h1 className='text-3xl pl-2'>Posts:</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+            <h1 className='text-3xl pl-2 mb-4'>Posts:</h1>
+            <div className={`flex flex-wrap justify-center gap-6 ${
+                userPosts.length === 1 ? "items-center justify-center min-h-[70vh]" : "justify-start"
+            }`}>
                 {postCards}
             </div>
         </div>

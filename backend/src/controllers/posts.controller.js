@@ -29,7 +29,7 @@ export const createPost = async (req, res) => {
 
 export const delPost= async (req,res)=>{
     try{
-        const postId=req.params._id
+        const postId=req.params.id
 
         const post = await Post.findById(postId);
         if(!post){
@@ -69,11 +69,12 @@ export const editPost = async (req, res) => {
 
 export const getPosts = async (req, res)=>{
   try{
-    const page = Number(req.body.page)
+    const page = Number(req.query.page)
     const limit=10;
     const skip=(page-1)*limit;
 
-    const location=req.body.location;
+    const loc = req.params.location || "all";
+    let location = loc === "all" ? "" : loc;
 
     let postsQuery=Post.find()
         .sort({createdAt:-1})
@@ -81,7 +82,7 @@ export const getPosts = async (req, res)=>{
         .limit(limit)
         .populate({
             path: "user",
-            select: "fullName location university _id",
+            select: "fullName location university _id profilePic",
             match: location ? {location:{$regex:location, $options: "i"}} : {}
         });
 
@@ -94,6 +95,7 @@ export const getPosts = async (req, res)=>{
         posts: filteredPosts,
     });
     }catch(err){
+        console.log(err.message);
         res.status(500).json({ message: "Server error", error: err.message });
     }
 };

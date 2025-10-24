@@ -12,12 +12,15 @@ import { useContext } from 'react'
 import ProfilePage from './pages/ProfilePage'
 import HomePage from './pages/HomePage'
 import CreatePostPage from './pages/CreatePostPage'
+import {ThemeContext} from './components/ThemeContext'
 
 function App() {
   const {user}=useContext(AuthContext)
 
+  const {theme}=useContext(ThemeContext)
+
   return (
-      <div className='h-screen' data-theme={"dark"}>
+      <div className='h-screen' data-theme={theme}>
         <Routes>
           <Route path='/' element={<Layout></Layout>}>
             <Route index element={<LandingPage></LandingPage>}></Route>
