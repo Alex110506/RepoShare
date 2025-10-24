@@ -46,8 +46,9 @@ export const delPost= async (req,res)=>{
 
 export const editPost = async (req, res) => {
     try {
-        const postId = req.params._id;
-        const {githubLink, descriere} = req.body;
+        const postId = req.params.id;
+        const {githubLink, description} = req.body;
+        console.log(req.body);
 
         const post = await Post.findById(postId);
         if (!post) {
@@ -55,7 +56,7 @@ export const editPost = async (req, res) => {
         }
 
         if (githubLink) post.githubLink = githubLink;
-        if (descriere) post.descriere = descriere;
+        if (description) post.description = description;
 
         const updatedPost = await post.save();
 

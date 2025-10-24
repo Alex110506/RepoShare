@@ -107,7 +107,7 @@ const ProfilePage = () => {
                 <p className='text-md'>Github: <a href={userData.linkGit}>{userData.linkGit}</a></p>
             </div>
         </div>
-        <div className='flex flex-col justify-start items-start'>
+        <div className='flex flex-col justify-start items-start mx-4'>
             <h1 className='text-3xl'>Bio:</h1>
             <p>{userData.bio}</p>
         </div>

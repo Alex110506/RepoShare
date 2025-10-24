@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const LandingPage = () => {
   return (
-    <div className="flex flex-col gap-6 px-4 md:px-16 lg:px-32 py-16">
+    <div className="flex flex-col gap-6 px-4 md:px-16 lg:px-32 py-16 bg-gradient-to-br from-violet-400/50 to-base-300">
         <div className="flex flex-col md:flex-row gap-6 items-stretch">
             <div className="flex-1 gap-6 bg-info-content shadow-xl hover:shadow-gray-600 hover:shadow-lg transition-shadow duration-300 rounded-xl p-8 text-center md:text-left flex flex-col items-start justify-center md:justify-start text-5xl md:text-7xl font-bold text-gray-900">
                 <div className='flex flex-row gap-2'>

@@ -56,54 +56,59 @@ const CreatePostPage = () => {
     };
 
   return (
-    <div className="flex flex-col md:flex-row justify-center gap-8 p-4">
-        <div className="flex flex-col gap-4 justify-center items-center">
-            {postData.image ? (
-                <img
-                    src={postData.image}
-                    alt="post preview"
-                    className="w-96 h-96 rounded-lg shadow-lg object-cover"
+    <div className='display flex flex-col gap-4 justify-center items-center'>
+        <h1 className='text-3xl font-bold mt-6'>Post a New Porject</h1>
+        <div className="flex flex-col md:flex-row justify-center gap-8 p-4">
+            <div className="flex flex-col gap-4 justify-center items-center">
+                {postData.image ? (
+                    <img
+                        src={postData.image}
+                        alt="post preview"
+                        className="w-96 h-96 rounded-lg shadow-lg object-cover"
+                    />
+                ) : (
+                    <div className="max-w-md h-96 w-96 bg-gray-200 flex items-center justify-center rounded-lg">
+                        <span className="text-gray-500">Image preview will appear here</span>
+                    </div>
+                )}
+                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    className="file-input file-input-bordered w-full max-w-md"
                 />
-            ) : (
-                <div className="max-w-md h-96 w-96 bg-gray-200 flex items-center justify-center rounded-lg">
-                    <span className="text-gray-500">Image preview will appear here</span>
+                
+            </div>
+            <div className='flex flex-col gap-8 w-96'>
+                <div className='flex flex-col gap-4'>
+                    <h2 className='text-xl'>Repository Link:</h2>
+                    <input type="text" className='input bg-base-300 w-full p-2'
+                        value={postData.githubLink}
+                        onChange={(e)=>{setPostData({...postData,githubLink:e.target.value})}}
+                    />
                 </div>
-            )}
-            <input
-                type="file"
-                accept="image/*"
-                onChange={handleFileChange}
-                className="file-input file-input-bordered w-full max-w-md"
-            />
+                <div className='flex flex-col gap-4'>
+                    <h2 className='text-xl'>Description:</h2>
+                    <textarea
+                        placeholder="Write a description..."
+                        className=" pl-2 textarea textarea-bordered w-full bg-base-300 max-w-md h-32"
+                        name="description"
+                        value={postData.description}
+                        onChange={(e)=>{setPostData({...postData,description:e.target.value})}}
+                    />
+                </div>
+                <button
+                    onClick={handleSubmit}
+                    className="btn btn-primary mt-2 w-full max-w-md bg-secondary font-bold"
+                >
+                    Upload Post
+                </button>
+            </div>
             
         </div>
-        <div className='flex flex-col gap-8 w-96'>
-            <div className='flex flex-col gap-4'>
-                <h2 className='text-xl'>Repository Link:</h2>
-                <input type="text" className='input bg-base-300 w-full p-2'
-                    value={postData.githubLink}
-                    onChange={(e)=>{setPostData({...postData,githubLink:e.target.value})}}
-                />
-            </div>
-            <div className='flex flex-col gap-4'>
-                <h2 className='text-xl'>Description:</h2>
-                <textarea
-                    placeholder="Write a description..."
-                    className=" pl-2 textarea textarea-bordered w-full bg-base-300 max-w-md h-32"
-                    name="description"
-                    value={postData.description}
-                    onChange={(e)=>{setPostData({...postData,description:e.target.value})}}
-                />
-            </div>
-            <button
-                onClick={handleSubmit}
-                className="btn btn-primary mt-2 w-full max-w-md bg-secondary font-bold"
-            >
-                Upload Post
-            </button>
-        </div>
-        
     </div>
+
+    
   )
 }
 

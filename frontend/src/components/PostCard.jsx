@@ -21,7 +21,7 @@ const PostCardProfile = ({postId,image,githubLink,description,fullName,userId,pr
         <div className='flex w-full'>
             <img src={`http://localhost:5001${image}`} className='w-96 h-96' alt="porject image" />
         </div>
-        <div className='flex px-4'>
+        <div className='flex px-4 overflow-x-auto'>
             <h1 className='text-xl font-bold'><a href={githubLink}>{githubLink}</a></h1>
         </div>
         <div className='flex p-4 pt-0'>
