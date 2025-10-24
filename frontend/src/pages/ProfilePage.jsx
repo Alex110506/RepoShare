@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../components/AuthContext'
 import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
+import PostCardProfile from '../components/PostCardProfile'
 
 const ProfilePage = () => {
 
@@ -17,6 +19,7 @@ const ProfilePage = () => {
         location:"",
         linkGit:""
     })
+    const [userPosts,setUserPosts]=React.useState([])
 
     const [loading,setLoading]=React.useState(true)
 
@@ -30,7 +33,6 @@ const ProfilePage = () => {
             if(!res.ok) throw new Error("Failed to fetch user data");
 
             const data = await res.json();
-            console.log(data);
             setUserData(data.user);
         }catch(err){
             console.error(err);
@@ -39,14 +41,56 @@ const ProfilePage = () => {
         }
     };
 
+    const fetchUserPosts=async ()=>{
+        try {
+            setLoading(true)
+            const res=await fetch("http://localhost:5001/api/post/getMyPosts",{
+                credentials:"include"
+            })
+            if(!res.ok){
+                toast("Failed to fetch user posts")
+            }
+
+            const data=await res.json()
+            setUserPosts(data.posts)
+        } catch (error) {
+            toast(error)
+            console.log(error);
+        } finally{
+            setLoading(false)
+        }
+    }
+
     const handleLogout=async ()=>{
         logout()
         navigate("/")
     }
 
+    console.log(userPosts);
+
     React.useEffect(()=>{
         fetchUserData()
+        fetchUserPosts()
     },[])
+
+    const postCards=userPosts.map((item)=>{
+        return (
+            <PostCardProfile
+                key={item._id}
+                postId={item._id}
+                image={item.projectImage}
+                githubLink={item.githubLink}
+                description={item.description}
+                fullName={userData.fullName}
+                userId={item.user}
+                profilePic={userData.profilePic}
+                university={userData.university}
+                location={userData.location}
+            >
+
+            </PostCardProfile>
+        )
+    })
 
   return (
     <div className='flex flex-col justify-center items-center py-8 gap-8'>
@@ -69,13 +113,9 @@ const ProfilePage = () => {
         </div>
         <hr className='w-[95vw] md:w-1/3'></hr>
         <div className='flex flex-col'>
-            <h1 className='text-3xl'>Posts:</h1>
+            <h1 className='text-3xl pl-2'>Posts:</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
-                <div className="bg-blue-500 p-6 rounded-lg text-white text-center">Item 1</div>
-                <div className="bg-green-500 p-6 rounded-lg text-white text-center">Item 2</div>
-                <div className="bg-red-500 p-6 rounded-lg text-white text-center">Item 3</div>
-                <div className="bg-yellow-500 p-6 rounded-lg text-white text-center">Item 4</div>
-                <div className="bg-purple-500 p-6 rounded-lg text-white text-center">Item 5</div>
+                {postCards}
             </div>
         </div>
     </div>
