@@ -116,7 +116,7 @@ export async function deleteUser(req,res) {
     }
 }
 
-export async function editProfile() {
+export async function editProfile(req,res) {
     try {
         const {fullName,email,location,university,linkGit}=req.body
         const userId=req.user._id

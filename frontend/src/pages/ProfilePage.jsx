@@ -135,25 +135,25 @@ const ProfilePage = () => {
                 <input
                     type="text"
                     className="w-full bg-transparent text-2xl"
-                    value={`Full name: ${userData.fullName}`}
+                    value={`${userData.fullName}`}
                     onChange={(e) => setUserData({ ...userData, fullName: e.target.value })}
                 />
                 <input
                     type="text"
                     className="w-full bg-transparent text-xl"
-                    value={`Email: ${userData.email}`}
+                    value={`${userData.email}`}
                     onChange={(e) => setUserData({ ...userData, email: e.target.value })}
                 />
                 <input
                     type="text"
                     className="w-full bg-transparent text-md"
-                    value={`City: ${userData.location}`}
+                    value={`${userData.location}`}
                     onChange={(e) => setUserData({ ...userData, location: e.target.value })}
                 />
                 <input
                     type="text"
                     className="w-full bg-transparent text-md"
-                    value={`University: ${userData.university}`}
+                    value={`${userData.university}`}
                     onChange={(e) => setUserData({ ...userData, university: e.target.value })}
                 />
                 {
@@ -163,7 +163,7 @@ const ProfilePage = () => {
                     <input
                         type="text"
                         className="w-full bg-transparent text-md"
-                        value={`City: ${userData.linkGit}`}
+                        value={`${userData.linkGit}`}
                         onChange={(e) => setUserData({ ...userData, linkGit: e.target.value })}
                     />
                 }
