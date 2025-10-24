@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import toast from 'react-hot-toast';
 
-const BASE_URL=import.meta.env.MODE==="development" ? "http://localhost:5001/api" : "/api"
+const BASE_URL=import.meta.env.MODE==="development" ? "http://localhost:5001/" : "/"
 
 const PostCardProfile = ({postId,image,githubLink,description,fullName,userId,profilePic,university, location}) => {
   
@@ -21,7 +21,7 @@ const PostCardProfile = ({postId,image,githubLink,description,fullName,userId,pr
         <hr></hr>
         
         <div className='flex w-full'>
-            <img src={`${BASE_URL}${image}`} className='w-96 h-96' alt="porject image" />
+            <img src={`${image}`} className='w-96 h-96' alt="porject image" />
         </div>
         <div className='flex px-4 overflow-x-auto'>
             <h1 className='text-xl font-bold'><a href={githubLink}>{githubLink}</a></h1>
