@@ -122,7 +122,7 @@ const PostCardProfile = ({postId,image,githubLink,description,fullName,userId,pr
                 <i className="bi bi-trash-fill text-md"></i>
             </button>
 
-            <button onClick={()=>handleDelete} className='flex flex-row transition-colors duration-300 gap-1 p-1 rounded-md bg-red-400 hover:bg-red-600'>
+            <button onClick={()=>handleDelete()} className='flex flex-row transition-colors duration-300 gap-1 p-1 rounded-md bg-red-400 hover:bg-red-600'>
                 <h3 className='text-md font-bold'>Delete Post</h3>
                 <i class="bi bi-pencil-fill text-md"></i>
             </button>
