@@ -130,7 +130,7 @@ export async function editProfile(req,res) {
             user.fullName=fullName
         if(email)
             user.email=email
-        if(city)
+        if(location)
             user.location=location
         if(university)
             user.university=university
@@ -141,6 +141,6 @@ export async function editProfile(req,res) {
 
         res.status(200).json({message: "User updated successfully."});
     } catch (error) {
-        res.status(500).json({message:"Server error.", error: err.message});
+        res.status(500).json({message:"Server error.", error: error.message});
     }
 }

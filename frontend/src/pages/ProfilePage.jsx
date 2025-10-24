@@ -62,11 +62,12 @@ const ProfilePage = () => {
                 credentials:"include"
             })
 
-            if(!res.ok)
-                toast.error("Failed to edit profile.")
-
             const data=await res.json()
-            toast.success("Updated user successfully.")
+            if(res.ok){
+                toast.success("User updated successfully")
+            }else{
+                toast.error(data.message || "Failed to update User")
+            }
         } catch (error) {
             toast.error(error)
             console.error(error);
