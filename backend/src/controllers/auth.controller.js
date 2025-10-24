@@ -115,3 +115,32 @@ export async function deleteUser(req,res) {
         res.status(500).json({message:"Server error.", error: err.message});
     }
 }
+
+export async function editProfile() {
+    try {
+        const {fullName,email,location,university,linkGit}=req.body
+        const userId=req.user._id
+        const user=User.findById(userId)
+
+        if(!user){
+            return res.status(404).json({ message: "User not found." });
+        }
+        
+        if(fullName)
+            user.fullName=fullName
+        if(email)
+            user.email=email
+        if(city)
+            user.location=location
+        if(university)
+            user.university=university
+        if(linkGit)
+            user.linkGit=linkGit
+
+        const updatedUser=await user.save()
+
+        res.status(200).json({message: "User updated successfully."});
+    } catch (error) {
+        res.status(500).json({message:"Server error.", error: err.message});
+    }
+}

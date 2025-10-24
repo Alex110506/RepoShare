@@ -1,5 +1,5 @@
 import express from 'express';
-import { signup,login,logout,deleteUser } from '../controllers/auth.controller.js';
+import { signup,login,logout,deleteUser, editProfile } from '../controllers/auth.controller.js';
 import { protectedRoute } from '../middleware/auth.middleware.js';
 import { verifyAdmin } from '../middleware/admin.middleware.js';
 
@@ -15,5 +15,6 @@ router.delete("/deleteUser/:id",verifyAdmin,deleteUser)
 router.get("/me",protectedRoute,(req,res)=>{
     res.status(200).json({success:true,user:req.user})
 })
+router.put("/edit",protectedRoute,editProfile)
 
 export default router

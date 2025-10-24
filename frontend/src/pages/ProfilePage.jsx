@@ -12,6 +12,8 @@ const ProfilePage = () => {
 
     const {logout}=useContext(AuthContext)
 
+    const [edit,setEdit]=React.useState(false)
+
     const [userData,setUserData]=React.useState({
         fullName:"",
         email:"",
@@ -42,6 +44,34 @@ const ProfilePage = () => {
             setLoading(false);
         }
     };
+
+    const handleuserEdit= async ()=>{
+        try {
+            const res=await fetch(`${BASE_URL}/user/edit`,{
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    fullName:userData.fullName,
+                    email:userData.email,
+                    location:userData.location,
+                    university:userData.university,
+                    linkGit:userData.linkGit
+                }),
+                credentials:"include"
+            })
+
+            if(!res.ok)
+                toast.error("Failed to edit profile.")
+
+            const data=await res.json()
+            toast.success("Updated user successfully.")
+        } catch (error) {
+            toast.error(error)
+            console.error(error);
+        }
+    }
 
     const fetchUserPosts=async ()=>{
         try {
@@ -102,11 +132,52 @@ const ProfilePage = () => {
                 <button onClick={handleLogout} className='btn bg-secondary p-4 text-lg font-bold'>Logout</button>
             </div>
             <div className='flex flex-col gap-2'>
-                <h1 className='text-2xl'>Full Name: {userData.fullName}</h1>
-                <h2 className='text-xl'>Email: {userData.email}</h2>
-                <p className='text-md'>City: {userData.location}</p>
-                <p className='text-md'>University: {userData.university}</p>
-                <p className='text-md'>Github: <a href={userData.linkGit}>{userData.linkGit}</a></p>
+                <input
+                    type="text"
+                    className="w-full bg-transparent text-2xl"
+                    value={`Full name: ${userData.fullName}`}
+                    onChange={(e) => setUserData({ ...userData, fullName: e.target.value })}
+                />
+                <input
+                    type="text"
+                    className="w-full bg-transparent text-xl"
+                    value={`Email: ${userData.email}`}
+                    onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+                />
+                <input
+                    type="text"
+                    className="w-full bg-transparent text-md"
+                    value={`City: ${userData.location}`}
+                    onChange={(e) => setUserData({ ...userData, location: e.target.value })}
+                />
+                <input
+                    type="text"
+                    className="w-full bg-transparent text-md"
+                    value={`University: ${userData.university}`}
+                    onChange={(e) => setUserData({ ...userData, university: e.target.value })}
+                />
+                {
+                    !edit ? 
+                        <p className='text-md'><a href={userData.linkGit}>{userData.linkGit}</a></p>
+                    :
+                    <input
+                        type="text"
+                        className="w-full bg-transparent text-md"
+                        value={`City: ${userData.linkGit}`}
+                        onChange={(e) => setUserData({ ...userData, linkGit: e.target.value })}
+                    />
+                }
+                
+                <button
+                    className='btn bg-accent text-lg p-1 font-bold'
+                    onClick={()=>{
+                        setEdit(edit ? false : true)
+                        if(edit)
+                            handleuserEdit()
+                    }}
+                >
+                    {edit ? "Save Changes" : "Edit Profile"}
+                </button>
             </div>
         </div>
         <div className='flex flex-col justify-start items-start mx-4'>
